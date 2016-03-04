@@ -18,6 +18,7 @@ angular.module('tarefas',[])
         });
 
   $scope.atualizar = function(){
+    $scope.loading = true;
     $http.get('/api/tarefas')
           .success(function(data) {
               $scope.todoData = data;
@@ -31,6 +32,7 @@ angular.module('tarefas',[])
   };
 
   $scope.deleteTodo = function(todoID) {
+    $scope.loading = true;
         $http.delete('/api/tarefas/' + todoID)
             .success(function(data) {
                 $scope.atualizar();
@@ -42,6 +44,7 @@ angular.module('tarefas',[])
     };
 
     $scope.createTodo = function(todoID) {
+      $scope.loading = true;
       $http.post('/api/tarefas', $scope.formData)
         .success(function(data) {
             $scope.formData.descr_tarefa = '';
@@ -55,6 +58,7 @@ angular.module('tarefas',[])
       };
 
       $scope.pauseTarefa = function(tarefaPeriodoID) {
+        $scope.loading = true;
         $http.put('/api/periodos/' + tarefaPeriodoID)
           .success(function(data) {
               $scope.atualizar();
@@ -66,6 +70,7 @@ angular.module('tarefas',[])
         };
 
       $scope.iniciaTarefa = function(tarefaID){
+        $scope.loading = true;
         $http.post('/api/periodos/' + tarefaID)
           .success(function(data){
             $scope.atualizar();
