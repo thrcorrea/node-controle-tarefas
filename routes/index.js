@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://postgres:postgres@localhost:5432/tarefas';
-//var connectionString = process.env.DATABASE_URL || 'postgres://postgr:fat2013@192.168.232.17:5432/tarefas';
+//var connectionString = process.env.DATABASE_URL || 'postgres://postgr:fat2013@201.22.212.163:5432/tarefas';
 var path = require('path');
 
 /* GET home page. */
