@@ -4,14 +4,17 @@ angular.module('tarefas',[])
 
   $scope.formData = {};
   $scope.todoData = {};
+  $scope.loading = true;
 
   $http.get('/api/tarefas')
         .success(function(data) {
             $scope.todoData = data;
             console.log(data);
+            $scope.loading = false;
         })
         .error(function(error) {
             console.log('Error: ' + error);
+            $scope.loading = true;
         });
 
   $scope.atualizar = function(){
@@ -19,9 +22,11 @@ angular.module('tarefas',[])
           .success(function(data) {
               $scope.todoData = data;
               console.log(data);
+              $scope.loading = false;
           })
           .error(function(error) {
               console.log('Error: ' + error);
+              $scope.loading = true;
           });
   };
 
@@ -32,6 +37,7 @@ angular.module('tarefas',[])
             })
             .error(function(data) {
                 console.log('Error: ' + data);
+                $scope.loading = true;
             });
     };
 
@@ -44,6 +50,7 @@ angular.module('tarefas',[])
         .error(function(error) {
             $scope.formData.descr_tarefa = '';
             console.log('Error: ' + error);
+            $scope.loading = true;
         });
       };
 
@@ -54,6 +61,7 @@ angular.module('tarefas',[])
           })
           .error(function(error) {
               console.log('Error: ' + error);
+              $scope.loading = true;
           });
         };
 
@@ -64,6 +72,7 @@ angular.module('tarefas',[])
           })
           .error(function(error){
             console.log('Error: ' + error);
+            $scope.loading = true;
           })
       };
 
