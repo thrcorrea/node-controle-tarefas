@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "app-module-path": "^1.0.5",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.13.2",
     "connect-flash": "~0.1.1",
@@ -15,14 +16,11 @@
     "express": "~4.13.1",
     "express-session": "~1.0.0",
     "method-override": "~1.0.0",
-    "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "pg": "^4.4.3",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
-    "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
-    "passport-twitter": "~1.0.2",
+    "pg": "^4.4.3",
     "serve-favicon": "~2.3.0"
   }
 }

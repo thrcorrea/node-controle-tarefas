@@ -1,9 +1,10 @@
 var pg           = require('pg');
-
+var path = require('path');
+var database = require('config/database.js');
 //var conString = "postgres://postgres:postgres@localhost:5432/tarefas";
-var conString = process.env.DATABASE_URL || 'postgres://hd_faturamento:fat2013@201.22.212.163:5432/tarefas';
+//var conString = process.env.DATABASE_URL || 'postgres://hd_faturamento:fat2013@201.22.212.163:5432/tarefas';
 
-var client = new pg.Client(conString);
+var client = new pg.Client(database.url);
 
 
 function User(){
@@ -22,7 +23,7 @@ function User(){
     this.save = function(callback) {
         //var conString = "postgres://postgres:postgres@localhost:5432/auth";
 
-        var client = new pg.Client(conString);
+        var client = new pg.Client(database.url);
         client.connect();
 
         console.log(this.username +' will be saved');
@@ -64,7 +65,7 @@ function User(){
 
 User.findOne = function(username, callback){
     //var conString = "postgres://postgres:postgres@localhost:5432/auth";
-    var client = new pg.Client(conString);
+    var client = new pg.Client(database.url);
 
     var isNotAvailable = false; //we are assuming the email is taking
     //var email = this.email;
@@ -115,7 +116,7 @@ User.findOne = function(username, callback){
 User.findById = function(id, callback){
     console.log("we are in findbyid");
     //var conString = "postgres://postgres:postgres@localhost:5432/auth";
-    var client = new pg.Client(conString);
+    var client = new pg.Client(database.url);
 
     client.connect();
     client.query("SELECT * from usuarios where id_usuario=$1", [id], function(err, result){
