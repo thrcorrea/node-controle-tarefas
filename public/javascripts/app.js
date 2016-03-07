@@ -21,6 +21,7 @@ angular.module('tarefas',[])
   function Notifique(){
     var options = {
       body: "Atualize os horários de suas FOs.",
+      icon: "icon.png",
       dir : "ltr"
     };
     if (!("Notification" in window)) {
@@ -49,10 +50,13 @@ angular.module('tarefas',[])
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
-    if ((h = 11) && (m > 50) && ($scope.notificacaoApresentada == false)) {
+    if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
       Notifique();
     }
-    else if ((h > 12) && ($scope.notificacaoApresentada == true)){
+    else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+      Notifique();
+    }
+    else if ((h = 13) && (m > 14 && m < 59) && ($scope.notificacaoApresentada == false)) {
       $scope.notificacaoApresentada = false;
     }
   },60000);
