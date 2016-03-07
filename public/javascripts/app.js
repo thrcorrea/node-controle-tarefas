@@ -5,6 +5,46 @@ angular.module('tarefas',[])
   $scope.formData = {};
   $scope.todoData = {};
   $scope.loading = true;
+  $scope.notificacaoApresentada = false;
+
+  function Notifique(){
+    var options = {
+      body: "Atualize os horários de suas FOs.",
+      dir : "ltr"
+    };
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+
+      var notification = new Notification("Atenção",options);
+      $scope.notificacaoApresentada = true;
+    }
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
+        if (permission === "granted") {
+          var notification = new Notification("Atenção",options);
+          $scope.notificacaoApresentada = true;
+        }
+      });
+    }
+  };
+
+
+  var timer=$interval(function(){
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    if ((h = 11) && (m > 50) && ($scope.notificacaoApresentada == false)) {
+      Notifique();
+    }
+    else if ((h > 12) && ($scope.notificacaoApresentada == true)){
+      $scope.notificacaoApresentada = false;
+    }
+  },1000);
 
   $http.get('/api/tarefas')
         .success(function(data) {
