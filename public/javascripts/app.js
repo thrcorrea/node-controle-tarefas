@@ -45,7 +45,7 @@ angular.module('tarefas',[])
   };
 
 
-  var timer=$interval(function(){
+  /*var timer=$interval(function(){
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
@@ -55,7 +55,7 @@ angular.module('tarefas',[])
     else if ((h > 12) && ($scope.notificacaoApresentada == true)){
       $scope.notificacaoApresentada = false;
     }
-  },60000);
+  },60000);*/
 
   $scope.atualizar = function(){
     $scope.loading = true;
