@@ -57,7 +57,7 @@ angular.module('tarefas',[])
       Notifique();
     }
     else if ((h = 13) && (m > 14 && m < 59) && ($scope.notificacaoApresentada == false)) {
-      $scope.notificacaoApresentada = false;
+      Notifique();
     }
   },60000);
 
