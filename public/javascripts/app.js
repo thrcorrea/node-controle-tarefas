@@ -38,7 +38,7 @@ angular.module('tarefas',[])
   function notificaCafe(){
     var options = {
       body: "Hora do Café",
-      icon: "http://cdn.mamamia.com.au/wp/wp-content/uploads/2015/01/tumblr_nht43tuGAC1s30ko5o1_500.gif",
+      //icon: "http://cdn.mamamia.com.au/wp/wp-content/uploads/2015/01/tumblr_nht43tuGAC1s30ko5o1_500.gif",
       dir : "ltr"
     };
     if (!("Notification" in window)) {
