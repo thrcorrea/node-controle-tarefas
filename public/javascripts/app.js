@@ -52,9 +52,11 @@ angular.module('tarefas',[])
   }
 
   function requisitaPermissaoNotificacao(){
-    Notification.requestPermission(function (permission) {
-      if (!('permission' in Notification)) {
-        Notification.permission = permission;
+    if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
       }
     }
   };
