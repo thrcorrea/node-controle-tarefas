@@ -22,7 +22,6 @@ angular.module('tarefas',[])
   function Notifique(){
     var options = {
       body: "Atualize os horários de suas FOs.",
-      icon: "icon.png",
       dir : "ltr"
     };
     if (!("Notification" in window)) {
@@ -37,8 +36,7 @@ angular.module('tarefas',[])
 
   function notificaCafe(){
     var options = {
-      body: "Hora do Café",
-      //icon: "http://cdn.mamamia.com.au/wp/wp-content/uploads/2015/01/tumblr_nht43tuGAC1s30ko5o1_500.gif",
+      body: "Hora do Cafe",
       dir : "ltr"
     };
     if (!("Notification" in window)) {
@@ -78,7 +76,7 @@ angular.module('tarefas',[])
       requisitaPermissaoNotificacao();
       Notifique();
     }
-    else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoApresentada == false)) {
+    else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
       requisitaPermissaoNotificacao();
       notificaCafe();
     }
