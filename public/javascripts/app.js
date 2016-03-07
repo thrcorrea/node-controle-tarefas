@@ -64,23 +64,26 @@ angular.module('tarefas',[])
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
-    // if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
-      // Notifique();
-    // }
-    // else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
-    //   Notifique();
-    // }
-    // else if ((h = 13) && (m > 5 && m < 20) && ($scope.notificacaoApresentada == false)) {
-    //   Notifique();
-    // }
-    //else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
-      //requisitaPermissaoNotificacao();
-      //notificaCafe();
-    //}
-    if ($scope.notificacaoApresentada == false) {
+    if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
       requisitaPermissaoNotificacao();
       Notifique();
     }
+    else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
+      Notifique();
+    }
+    else if ((h = 13) && (m > 5 && m < 20) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
+      Notifique();
+    }
+    // else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
+      // requisitaPermissaoNotificacao();
+      // notificaCafe();
+    // }
+    // if ($scope.notificacaoApresentada == false) {
+    //   requisitaPermissaoNotificacao();
+    //   Notifique();
+    // }
   },1000);
 
   $scope.atualizar = function(){
