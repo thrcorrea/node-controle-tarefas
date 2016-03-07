@@ -20,17 +20,19 @@ angular.module('tarefas',[])
         });
 
   function Notifique(){
-    var options = {
-      body: "Atualize os horários de suas FOs.",
-      dir : "ltr"
-    };
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-    else if (Notification.permission === "granted") {
+    if ($scope.notificacaoApresentada == false){
+      var options = {
+        body: "Atualize os horários de suas FOs.",
+        dir : "ltr"
+      };
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
+      else if (Notification.permission === "granted") {
 
-      var notification = new Notification("Atenção",options);
-      $scope.notificacaoApresentada = true;
+        var notification = new Notification("Atenção",options);
+        $scope.notificacaoApresentada = true;
+      }
     }
   };
 
@@ -49,15 +51,15 @@ angular.module('tarefas',[])
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
-    if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+    if (h == 11 && m > 50 && m < 59) {
       requisitaPermissaoNotificacao();
       Notifique();
     }
-    else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+    else if (h == 17 && m > 50 && m < 59) {
       requisitaPermissaoNotificacao();
       Notifique();
     }
-    else if ((h = 13) && (m > 5 && m < 20) && ($scope.notificacaoApresentada == false)) {
+    else if (h == 13 && m > 5 && m < 20) {
       requisitaPermissaoNotificacao();
       Notifique();
     }
