@@ -32,6 +32,17 @@ angular.module('tarefas',[])
       var notification = new Notification("Atenção",options);
       $scope.notificacaoApresentada = true;
     }
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
+        if (permission === "granted") {
+          var notification = new Notification("Atenção",options);
+          $scope.notificacaoApresentada = true;
+        }
+      });
+    }
   };
 
   /*function notificaCafe(){
@@ -49,31 +60,18 @@ angular.module('tarefas',[])
     }
   };*/
 
-  function requisitaPermissaoNotificacao(){
-    if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        if (!('permission' in Notification)) {
-          Notification.permission = permission;
-        }
-      }
-    }
-  };
-
 
   var timer = $interval(function(){
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
     if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
-      requisitaPermissaoNotificacao();
       Notifique();
     }
     else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
-      requisitaPermissaoNotificacao();
       Notifique();
     }
     else if ((h = 13) && (m > 5 && m < 20) && ($scope.notificacaoApresentada == false)) {
-      requisitaPermissaoNotificacao();
       Notifique();
     }
     //else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
