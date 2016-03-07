@@ -44,21 +44,6 @@ angular.module('tarefas',[])
     }
   };
 
-  /*function notificaCafe(){
-    var options = {
-      body: "Hora do Cafe",
-      dir : "ltr"
-    };
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-    else if (Notification.permission === "granted") {
-
-      var notification = new Notification("Atenção",options);
-      $scope.notificacaoCafeApresentada = true;
-    }
-  };*/
-
 
   var timer = $interval(function(){
     var date = new Date();
@@ -76,14 +61,6 @@ angular.module('tarefas',[])
       requisitaPermissaoNotificacao();
       Notifique();
     }
-    // else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
-      // requisitaPermissaoNotificacao();
-      // notificaCafe();
-    // }
-    // if ($scope.notificacaoApresentada == false) {
-    //   requisitaPermissaoNotificacao();
-    //   Notifique();
-    // }
   },1000);
 
   $scope.atualizar = function(){
