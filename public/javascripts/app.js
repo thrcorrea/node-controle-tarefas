@@ -49,7 +49,7 @@ angular.module('tarefas',[])
       var notification = new Notification("Atenção",options);
       $scope.notificacaoCafeApresentada = true;
     }
-  }
+  };
 
   function requisitaPermissaoNotificacao(){
     if (Notification.permission !== 'denied') {
