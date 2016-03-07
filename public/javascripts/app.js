@@ -1,6 +1,6 @@
 angular.module('tarefas',[])
 
-.controller('mainController', function($scope, $http){
+.controller('mainController', function($scope, $interval, $http){
 
   $scope.formData = {};
   $scope.todoData = {};
@@ -50,7 +50,7 @@ angular.module('tarefas',[])
     var h = date.getHours();
     var m = date.getMinutes();
     if ((h = 11) && (m > 50) && ($scope.notificacaoApresentada == false)) {
-      //Notifique();
+      Notifique();
     }
     else if ((h > 12) && ($scope.notificacaoApresentada == true)){
       $scope.notificacaoApresentada = false;
