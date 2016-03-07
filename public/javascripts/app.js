@@ -6,6 +6,7 @@ angular.module('tarefas',[])
   $scope.todoData = {};
   $scope.loading = true;
   $scope.notificacaoApresentada = false;
+  $scope.notificacaoCafeApresentada = false;
 
   $http.get('/api/tarefas')
         .success(function(data) {
@@ -32,16 +33,29 @@ angular.module('tarefas',[])
       var notification = new Notification("Atenção",options);
       $scope.notificacaoApresentada = true;
     }
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        if (!('permission' in Notification)) {
-          Notification.permission = permission;
-        }
-        if (permission === "granted") {
-          var notification = new Notification("Atenção",options);
-          $scope.notificacaoApresentada = true;
-        }
-      });
+  };
+
+  function notificaCafe(){
+    var options = {
+      body: "Hora do Café",
+      icon: "http://cdn.mamamia.com.au/wp/wp-content/uploads/2015/01/tumblr_nht43tuGAC1s30ko5o1_500.gif",
+      dir : "ltr"
+    };
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+
+      var notification = new Notification("Atenção",options);
+      $scope.notificacaoCafeApresentada = true;
+    }
+  }
+
+  function requisitaPermissaoNotificacao(){
+    Notification.requestPermission(function (permission) {
+      if (!('permission' in Notification)) {
+        Notification.permission = permission;
+      }
     }
   };
 
@@ -51,13 +65,20 @@ angular.module('tarefas',[])
     var h = date.getHours();
     var m = date.getMinutes();
     if ((h = 11) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
       Notifique();
     }
     else if ((h = 17) && (m > 50 && m < 59) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
       Notifique();
     }
-    else if ((h = 13) && (m > 14 && m < 59) && ($scope.notificacaoApresentada == false)) {
+    else if ((h = 13) && (m > 5 && m < 20) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
       Notifique();
+    }
+    else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoApresentada == false)) {
+      requisitaPermissaoNotificacao();
+      notificaCafe();
     }
   },60000);
 
