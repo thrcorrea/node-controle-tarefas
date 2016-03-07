@@ -7,6 +7,17 @@ angular.module('tarefas',[])
   $scope.loading = true;
   $scope.notificacaoApresentada = false;
 
+  $http.get('/api/tarefas')
+        .success(function(data) {
+            $scope.todoData = data;
+            console.log(data);
+            $scope.loading = false;
+        })
+        .error(function(error) {
+            console.log('Error: ' + error);
+            $scope.loading = true;
+        });
+
   function Notifique(){
     var options = {
       body: "Atualize os horários de suas FOs.",
@@ -45,17 +56,6 @@ angular.module('tarefas',[])
       $scope.notificacaoApresentada = false;
     }
   },60000);
-
-  $http.get('/api/tarefas')
-        .success(function(data) {
-            $scope.todoData = data;
-            console.log(data);
-            $scope.loading = false;
-        })
-        .error(function(error) {
-            console.log('Error: ' + error);
-            $scope.loading = true;
-        });
 
   $scope.atualizar = function(){
     $scope.loading = true;
