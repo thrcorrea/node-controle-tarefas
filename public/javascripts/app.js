@@ -34,7 +34,7 @@ angular.module('tarefas',[])
     }
   };
 
-  function notificaCafe(){
+  /*function notificaCafe(){
     var options = {
       body: "Hora do Cafe",
       dir : "ltr"
@@ -47,7 +47,7 @@ angular.module('tarefas',[])
       var notification = new Notification("Atenção",options);
       $scope.notificacaoCafeApresentada = true;
     }
-  };
+  };*/
 
   function requisitaPermissaoNotificacao(){
     if (Notification.permission !== 'denied') {
@@ -76,10 +76,10 @@ angular.module('tarefas',[])
       requisitaPermissaoNotificacao();
       Notifique();
     }
-    else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
-      requisitaPermissaoNotificacao();
-      notificaCafe();
-    }
+    //else if ((h = 13) && (m > 40 && m < 59) && ($scope.notificacaoCafeApresentada == false)) {
+      //requisitaPermissaoNotificacao();
+      //notificaCafe();
+    //}
   },60000);
 
   $scope.atualizar = function(){
