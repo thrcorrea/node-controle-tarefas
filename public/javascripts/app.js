@@ -44,7 +44,7 @@ angular.module('tarefas',[])
     else if ((h > 12) && ($scope.notificacaoApresentada == true)){
       $scope.notificacaoApresentada = false;
     }
-  },1000);
+  },60000);
 
   $http.get('/api/tarefas')
         .success(function(data) {
