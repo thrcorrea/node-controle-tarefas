@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,10 +12,10 @@ ul {
   padding-left: 10px;
 }
 
-.container {
-  max-width: 500px;
-  background-color: #eeeeee;
-  border: 1px solid black;
+#corpo_tarefas {
+  max-width: 600px;
+  /*background-color: #eeeeee;*/
+  /*border: 1px solid black;*/
 }
 
 .header {

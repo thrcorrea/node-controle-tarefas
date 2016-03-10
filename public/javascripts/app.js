@@ -63,6 +63,9 @@ angular.module('tarefas',[])
       requisitaPermissaoNotificacao();
       Notifique();
     }
+    else{
+      $scope.notificacaoApresentada = false;
+    }
   },1000);
 
   $scope.atualizar = function(){
@@ -78,6 +81,10 @@ angular.module('tarefas',[])
               $scope.loading = true;
           });
   };
+
+  var timerAtualizar = $interval(function(){
+    $scope.atualizar();
+  },60000 * 25);
 
   $scope.deleteTodo = function(todoID) {
     $scope.loading = true;

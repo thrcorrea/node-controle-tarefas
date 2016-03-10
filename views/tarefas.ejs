@@ -11,7 +11,17 @@
   </head>
   <body ng-controller="mainController">
 
-    <div class="container">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="corpo_tarefas" class="container">
 
       <div class="header">
         <h1>Tarefas do <%= user.username %></h1>
@@ -46,6 +56,7 @@
       </div>
 
     </div>
+
 
     <!-- scripts -->
     <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
