@@ -46,20 +46,29 @@ angular.module('tarefas',[])
     }
   };
 
-
-  var timer = $interval(function(){
+  function horaDeNotificar(){
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
+    var dia = date.getDay();
+
     if (h == 11 && m > 50 && m < 59) {
-      requisitaPermissaoNotificacao();
-      Notifique();
-    }
-    else if (h == 17 && m > 50 && m < 59) {
-      requisitaPermissaoNotificacao();
-      Notifique();
+      return true;
     }
     else if (h == 13 && m > 5 && m < 20) {
+      return true;
+    }
+    else if ( ((h == 17 && dia != 5) || (h == 16 && dia == 5)) && m > 50 && m < 59 ) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  };
+
+
+  var timer = $interval(function(){
+    if (horaDeNotificar()){
       requisitaPermissaoNotificacao();
       Notifique();
     }

@@ -6,8 +6,8 @@
     <!-- styles -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <!-- <link href="stylesheets/style.css" rel="stylesheet" media="screen"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="stylesheets/style.css" rel="stylesheet" media="screen">
   </head>
   <body ng-controller="mainController">
     <nav class="navbar navbar-default">
@@ -47,6 +47,10 @@
         </form>
       </div>
 
+      <p class="text-center" ng-show="loading">
+        <span class="fa fa-spinner fa-spin fa-3x"></span>
+      </p>
+
       <br>
 
       <div class="todo-list">
@@ -59,9 +63,7 @@
               </h3>
           </li><hr>
         </ul>
-        <p class="text-center" ng-show="loading">
-					<span class="fa fa-spinner fa-spin fa-3x"></span>
-				</p>
+
       </div>
 
     </div>
