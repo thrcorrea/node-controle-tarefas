@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var database = require('config/database.js');
-//var connectionString = 'postgres://postgres:postgres@localhost:5432/tarefas';
-//var connectionString = process.env.DATABASE_URL || 'postgres://hd_faturamento:fat2013@201.22.212.163:5432/tarefas';
-//var connectionString = process.env.DATABASE_URL || 'postgres://postgr:fat2013@201.22.212.163:5432/tarefas';
 var path = require('path');
 
 module.exports = function(app, passport) {
+
+
+    //o vicente é indigente.
 
     // =====================================
     // HOME PAGE (with login links) ========
