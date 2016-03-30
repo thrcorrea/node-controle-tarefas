@@ -91,9 +91,9 @@ angular.module('tarefas',[])
           });
   };
 
-  var timerAtualizar = $interval(function(){
-    $scope.atualizar();
-  },60000 * 25);
+//   var timerAtualizar = $interval(function(){
+//     $scope.atualizar();
+//   },60000 * 25);
 
   $scope.deleteTodo = function(todoID) {
     $scope.loading = true;
