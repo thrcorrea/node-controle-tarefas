@@ -6,9 +6,6 @@ var path = require('path');
 
 module.exports = function(app, passport) {
 
-
-    //o vicente é indigente.
-
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
