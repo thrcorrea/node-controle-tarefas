@@ -7,6 +7,7 @@ angular.module('tarefas',[])
   $scope.loading = true;
   $scope.notificacaoApresentada = false;
   $scope.notificacaoCafeApresentada = false;
+  $scope.notificacaoPontoApresentada = false;
 
   $http.get('/api/tarefas')
         .success(function(data) {
@@ -32,6 +33,23 @@ angular.module('tarefas',[])
 
         var notification = new Notification("Atenção",options);
         $scope.notificacaoApresentada = true;
+      }
+    }
+  };
+
+  function controlePonto(){
+    if ($scope.notificacaoPontoApresentada == false){
+      var options = {
+        body: "Está na hora de bater o ponto.",
+        dir : "ltr"
+      };
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
+      else if (Notification.permission === "granted") {
+
+        var notification = new Notification("Atenção",options);
+        $scope.notificacaoPontoApresentada = true;
       }
     }
   };
@@ -66,6 +84,22 @@ angular.module('tarefas',[])
     }
   };
 
+  function horaDeNotificarPonto(){
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var dia = date.getDay();
+
+    if (h == 07 && m > 58 && m < 59) {
+      return true;
+    }
+    else if (h == 12 && m > 58 && m < 59) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  };
 
   var timer = $interval(function(){
     if (horaDeNotificar()){
@@ -74,6 +108,16 @@ angular.module('tarefas',[])
     }
     else{
       $scope.notificacaoApresentada = false;
+    }
+  },1000);
+
+  var timer = $interval(function(){
+    if (horaDeNotificarPonto()){
+      requisitaPermissaoNotificacao();
+	  controlePonto();
+    }
+    else{
+      $scope.notificacaoPontoApresentada = false;
     }
   },1000);
 
