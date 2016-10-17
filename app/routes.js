@@ -104,8 +104,8 @@ module.exports = function(app, passport) {
 
         var query = client.query("select ta.id_tarefa, ta.descr_tarefa, coalesce(( "+
            "select sum(coalesce(cast(periodo as integer),0)) from tarefas_periodos tp where "+
-           "cod_tarefa = ta.id_tarefa ),0) as periodo "+
-           ", coalesce((select id_tarefa_periodo from tarefas_periodos where cod_tarefa = ta.id_tarefa and data_hora_tarefa_fim is null order by id_tarefa_periodo desc limit 1),0) as id_tarefa_periodo "+
+           "ativo and cod_tarefa = ta.id_tarefa ),0) as periodo "+
+           ", coalesce((select id_tarefa_periodo from tarefas_periodos where ativo and cod_tarefa = ta.id_tarefa and data_hora_tarefa_fim is null order by id_tarefa_periodo desc limit 1),0) as id_tarefa_periodo "+
            "from tarefas ta where not coalesce(encerrada,false) and cod_usuario = $1 order by id_tarefa desc",[req.user.id_usuario]);
 
         query.on('row', function(row){
@@ -197,8 +197,8 @@ module.exports = function(app, passport) {
 
         var query = client.query("select ta.id_tarefa, ta.descr_tarefa, coalesce(( "+
            "select sum(coalesce(periodo,0)) from tarefas_periodos tp where "+
-           "cod_tarefa = ta.id_tarefa ),0) as periodo "+
-           ", coalesce((select id_tarefa_periodo from tarefas_periodos where cod_tarefa = ta.id_tarefa and data_hora_tarefa_fim is null order by id_tarefa_periodo desc limit 1),0) as id_tarefa_periodo "+
+           "ativo and cod_tarefa = ta.id_tarefa ),0) as periodo "+
+           ", coalesce((select id_tarefa_periodo from tarefas_periodos where ativo and cod_tarefa = ta.id_tarefa and data_hora_tarefa_fim is null order by id_tarefa_periodo desc limit 1),0) as id_tarefa_periodo "+
            "from tarefas ta where not coalesce(encerrada,false) order by id_tarefa desc");
 
         query.on('row', function(row){
@@ -229,7 +229,7 @@ module.exports = function(app, passport) {
 
         client.query("insert into tarefas_periodos(cod_tarefa, data_hora_tarefa_inicio) values ($1, cast(current_timestamp as timestamp without time zone))",[id_tarefa]);
 
-        var query = client.query("select * from tarefas_periodos where cod_tarefa = $1 order by id_tarefa_periodo desc",[id_tarefa]);
+        var query = client.query("select * from tarefas_periodos where ativo and cod_tarefa = $1 order by id_tarefa_periodo desc",[id_tarefa]);
 
         query.on('row', function(row){
           results.push(row);
@@ -243,8 +243,37 @@ module.exports = function(app, passport) {
       });
 
     });
+    
+   app.delete('/api/periodos/:id_tarefa', function(req, res, next){
 
+      var results = [];
 
+      var id_tarefa = req.params.id_tarefa;
+
+      pg.connect(database.url, function(err, client, done){
+        if (err){
+          done();
+          console.log(err);
+          return res.status(500).json({success: false, data: err});
+        }
+
+        client.query("update tarefas_periodos set ativo = false where cod_tarefa = $1",[id_tarefa]);
+
+        var query = client.query("select * from tarefas_periodos where ativo and cod_tarefa = $1 order by id_tarefa_periodo desc",[id_tarefa]);
+
+        query.on('row', function(row){
+          results.push(row);
+        })
+
+        query.on('end', function(){
+          done();
+          return res.json(results);
+        })
+
+      });
+
+    });
+    
 };
 
 
