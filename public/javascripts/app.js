@@ -188,5 +188,19 @@ angular.module('tarefas',[])
             $scope.loading = true;
           })
       };
+      
+      $scope.resetaTarefa = function(tarefaID){
+        if(tarefaID > 0){
+          $scope.loading = true;
+          $http.delete('/api/periodos/' + tarefaID)
+            .success(function(data){
+              $scope.atualizar();
+            })
+            .error(function(error){
+              console.log('Error: ' + error);
+              $scope.loading = true;
+            })
+         }
+      };
 
 });
