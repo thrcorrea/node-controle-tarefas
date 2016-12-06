@@ -60,6 +60,7 @@
                   <input class="lead" type="checkbox" ng-click="deleteTodo(tarefa.id_tarefa)">&nbsp;{{ tarefa.descr_tarefa }} ({{ tarefa.periodo}} min) </input>
                   <button ng-if="tarefa.id_tarefa_periodo >= 1" class="button" type="btn btn-primary" ng-click="pauseTarefa(tarefa.id_tarefa_periodo)"><span class="glyphicon glyphicon-pause"></span></button>
                   <button ng-if="tarefa.id_tarefa_periodo <= 0" class="button" type="btn btn-primary" ng-click="iniciaTarefa(tarefa.id_tarefa)" ><span class="glyphicon glyphicon-play"></span></button>
+                  <button ng-if="tarefa.id_tarefa_periodo >= 0" class="button" type="btn btn-primary" ng-click="resetaTarefa(tarefa.id_tarefa)" ><span class="glyphicon glyphicon-remove"></span></button>
               </h3>
           </li><hr>
         </ul>
